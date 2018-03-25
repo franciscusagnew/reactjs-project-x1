@@ -10,12 +10,28 @@
 	<link href="css/style.css">
 </head>
 <body>
+	<div id="greeting"></div>
 	<div id="root"></div>
+
+
 	<script type="text/babel">
+		// React element
+		var message = <h1>Hello World</h1>;
+		var num = 0;
+
 		ReactDOM.render(
-			<div>Hello World</div>,
-			document.getElementById("root")
+			message,
+			document.getElementById("greeting")
 		)
+
+		function updateNum() {
+			ReactDOM.render(
+				<div>{num++}</div>,
+				document.getElementById("root")
+			)
+		}
+
+		setInterval(updateNum, 100)
 	</script>
 </body>
 </html>
