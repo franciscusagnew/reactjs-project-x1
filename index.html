@@ -24,6 +24,8 @@
 	<div id="element7"></div>
 	<div id="element8"></div>
 	<div id="element9"></div>
+	<div id="element10"></div>
+	<div id="element11"></div>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -165,6 +167,83 @@
 		ReactDOM.render(
 			<Content3 index="2" numberArray={[1,2,3,4,5]}/>,
 			document.getElementById("element9")
+		)
+
+		/** Components: defining all the UI in one Functional Component **/
+		function ShoppingApp2(props){
+	        return (
+	            <div>
+	                <div>
+	                    <h1>My ReactJS Resources</h1>
+	                    <h2>Total Number of Items: 6</h2>
+	                </div>
+	                <div>
+	                    <h3>Books</h3>
+	                    <ol>
+	                        <li>Beginning ReactJS</li>
+	                        <li>ReactJS: Getting Started</li>
+	                        <li>ReactJS Bible</li>
+	                    </ol>
+	                </div>
+
+	                <div>
+	                    <h3>Resources</h3>
+	                    <ol>
+	                        <li>Lynda.com</li>
+	                        <li>Team Treehouse</li>
+	                        <li>Pluralsight</li>
+	                    </ol>
+	                </div>
+	            </div>
+	        )
+	    }
+
+	    ReactDOM.render(
+	        <ShoppingApp2 />,
+	        document.getElementById("element10")
+	    )
+
+		/** Composing Components: Functional Components can include other Functional Components in their output. This lets us keep our components organized and readible. **/
+		function ShoppingTitle(props) {
+			return(
+				<div>
+					<h1>{props.title}</h1>
+					<h2>Total number of items: {props.numItems}</h2>
+				</div>
+			)
+		}
+
+		function ListItem(props) {
+			return <li>{props.item}</li>
+		}
+
+		function ShoppingList(props) {
+			return(
+				<div>
+					<h3>{props.header}</h3>
+					<ol>
+						<ListItem item={props.items[0]} />
+						<ListItem item={props.items[1]} />
+						<ListItem item={props.items[2]} />
+					</ol>
+				</div>
+			)
+		}
+
+		function ShoppingApp(props) {
+			return(
+				<div>
+					<ShoppingTitle title="My Shopping List" numItems="9" />
+					<ShoppingList header="Food" items={["Apple", "Bread", "Cheese"]} />
+					<ShoppingList header="Clothes" items={["Shirt", "Pants", "Hat"]} />
+					<ShoppingList header="Supplies" items={["Pen", "Paper", "Glue"]} />
+				</div>
+			)
+		}
+
+		ReactDOM.render(
+			<ShoppingApp />,
+			document.getElementById("element11")
 		)
 
 	</script>
