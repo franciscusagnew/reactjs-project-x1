@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link href="css/style.css">
 </head>
-<body>
+<body class="container">
 	<div id="root"></div>
 	<div id="greeting"></div>
 	<div id="product"></div>
@@ -26,6 +26,10 @@
 	<div id="element9"></div>
 	<div id="element10"></div>
 	<div id="element11"></div>
+	<div id="element12"></div>
+	<div id="element13"></div>
+	<div id="element14"></div>
+	<div id="element15"></div>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -43,7 +47,7 @@
 
 		function updateNum() {
 			ReactDOM.render(
-				<div>{num++}</div>,
+				<h2 className="text-center">{num++}</h2>,
 				document.getElementById("root")
 			)
 		};
@@ -78,8 +82,8 @@
 			document.getElementById("area")
 		);
 
-		var element = <button className ="deleteButton"> Delete </button>;
-		var element2 = <img src ={item.imageURL}></img>;
+		var element = <button className ="deleteButton btn btn-danger"> Delete </button>;
+		var element2 = <img className="img-thumbnail img-fluid" src ={item.imageURL}></img>;
 
 		ReactDOM.render(
 			element,
@@ -127,9 +131,9 @@
 
 		var product2 = {name:"Xbox One",stock:0}
 
-	    if(product2.stock < 1){
+	    if(product2.stock < 1) {
 	        var element6 = <h2>The store has no {product2.name}'s in stock</h2>
-	    } else{
+	    } else {
 	        var element6 = <h2>The store has {product2.stock} {product2.name}'s in stock</h2>
 	    }
 
@@ -172,7 +176,7 @@
 		/** Components: defining all the UI in one Functional Component **/
 		function ShoppingApp2(props){
 	        return (
-	            <div>
+	            <div className="container bg-dark text-white p-5">
 	                <div>
 	                    <h1>My ReactJS Resources</h1>
 	                    <h2>Total Number of Items: 6</h2>
@@ -232,7 +236,7 @@
 
 		function ShoppingApp(props) {
 			return(
-				<div>
+				<div className="container bg-warning my-5 p-5">
 					<ShoppingTitle title="My Shopping List" numItems="9" />
 					<ShoppingList header="Food" items={["Apple", "Bread", "Cheese"]} />
 					<ShoppingList header="Clothes" items={["Shirt", "Pants", "Hat"]} />
@@ -244,6 +248,56 @@
 		ReactDOM.render(
 			<ShoppingApp />,
 			document.getElementById("element11")
+		)
+
+		/** Conditional Rendering: The output of a Functional Component can be determined based on its properties. **/
+		function Feature(props) {
+			if(props.active == true) {
+				return <button className="btn btn-primary">Active</button>
+			} else {
+				return <button className="btn" disabled>Disabled</button>
+			}
+		}
+
+		ReactDOM.render(
+			<Feature active={true}/>,
+			document.getElementById("element12")
+		)
+
+		/** This can also be accomplished using an inline conditional operator: **/
+		function Feature2(props){
+        return <button className="btn">{props.active? "active" : "not active"}</button>
+    }
+
+    ReactDOM.render(
+			<Feature2 active={true} />,
+			document.getElementById("element13")
+		)
+
+		/** Preventing Rendering: The output of a Functional Component can be prevented from rendering. **/
+		function Feature3(props) {
+			if(props.active) {
+				return null
+			} else {
+				return <h1>{props.message}</h1>
+			}
+		}
+
+		ReactDOM.render(
+			<Feature3 active={false} message={<button className="btn btn-primary">Active</button>}/>,
+			document.getElementById("element14")
+		)
+
+		/** You can also conditionally prevent a feature from rendering using the && operator: **/
+		function Feature4(props) {
+			return (
+				props.active && <button className="btn btn-primary">Active</button>
+			)
+		}
+
+		ReactDOM.render(
+			<Feature4 active={false}/>,
+			document.getElementById("element15")
 		)
 
 	</script>
