@@ -7,31 +7,166 @@
 	<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
 	<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link href="css/style.css">
 </head>
 <body>
-	<div id="greeting"></div>
 	<div id="root"></div>
+	<div id="greeting"></div>
+	<div id="product"></div>
+	<div id="area"></div>
+	<div id="element1"></div>
+	<div id="element2"></div>
+	<div id="element3"></div>
+	<div id="element4"></div>
+	<div id="element5"></div>
+	<div id="element6"></div>
+	<div id="element7"></div>
+	<div id="element8"></div>
+	<div id="element9"></div>
 
-
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script type="text/babel">
-		// React element
-		var message = <h1>Hello World</h1>;
+		var str1 = "World!";
+		var message = <h1>Hello {str1}</h1>;
 		var num = 0;
+		
 
 		ReactDOM.render(
 			message,
 			document.getElementById("greeting")
-		)
+		);
 
 		function updateNum() {
 			ReactDOM.render(
 				<div>{num++}</div>,
 				document.getElementById("root")
 			)
+		};
+
+		setInterval(updateNum, 100);
+
+		var item = {
+			name: "Playstation 4",
+			price: 400,
+			imageURL: "https://rukminim1.flixcart.com/image/704/704/gamingconsole/f/q/q/playstation-4-ps4-pro-1-sony-na-original-imaer7uyef5xpc48.jpeg?q=70"
+		};
+		
+		var product = <p>{item.name} : ${item.price}</p>;
+
+		ReactDOM.render(
+			product,
+			document.getElementById("product")
+		);
+
+		var length = 20;
+		var width = 10;
+
+
+		function calcArea(x,y) {
+			return x * y
+		};
+
+		var area = <div>The Area is: {calcArea(length,width)}</div>;
+
+		ReactDOM.render(
+			area,
+			document.getElementById("area")
+		);
+
+		var element = <button className ="deleteButton"> Delete </button>;
+		var element2 = <img src ={item.imageURL}></img>;
+
+		ReactDOM.render(
+			element,
+			document.getElementById("element1")
+		);
+
+		ReactDOM.render(
+			element2,
+			document.getElementById("element2")
+		);
+
+		var styleObject = {
+	        backgroundColor: 'red',
+	        color:'blue',
+	        fontSize: 25,
+	        width: 704,
+	        height: 100,
+	    };
+
+    	var element3 = <input style={styleObject} />;
+
+    	ReactDOM.render(
+			element3,
+			document.getElementById("element3")
+		);
+
+		var element4 = <input style = {{width:704,height:100, backgroundColor:'blue'}} />
+		ReactDOM.render(
+			element4,
+			document.getElementById("element4")
+		);
+
+		var element5 = (
+	        <div>
+	            <div>Hello World</div>
+	            <div>Hello World</div>
+	        </div>
+
+	    )
+
+	    ReactDOM.render(
+			element5,
+			document.getElementById("element5")
+		);
+
+		var product2 = {name:"Xbox One",stock:0}
+
+	    if(product2.stock < 1){
+	        var element6 = <h2>The store has no {product2.name}'s in stock</h2>
+	    } else{
+	        var element6 = <h2>The store has {product2.stock} {product2.name}'s in stock</h2>
+	    }
+
+	    ReactDOM.render(
+	        element6,
+	        document.getElementById("element6")
+	    )
+
+	    /** Functional Components **/
+	    function Content1() {
+	    	return <p>This is some content</p>	
 		}
 
-		setInterval(updateNum, 100)
+		var element7 = <Content1 />
+
+		ReactDOM.render(
+			element7,
+			document.getElementById("element7")
+		)
+
+		/** Adding Properties to Functional Components **/
+		function Content2(props) {
+	    	return <p>{props.content}</p>	
+		}
+
+		ReactDOM.render(
+			<Content2 content="This is so more content"/>,
+			document.getElementById("element8")
+		)
+
+		function Content3(props) {
+	    	return <p>Value: {props.numberArray[props.index]}</p>	
+		}
+
+		ReactDOM.render(
+			<Content3 index="2" numberArray={[1,2,3,4,5]}/>,
+			document.getElementById("element9")
+		)
+
 	</script>
 </body>
 </html>
